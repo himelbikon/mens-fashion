@@ -1,9 +1,13 @@
 <template>
   <div class="home">
     <section><Carousel /></section>
-    <section><SomeProducts title="Latest Products" /></section>
+    <section>
+      <SomeProducts title="Latest Products" path="/api/shop/latest/" />
+    </section>
     <section><CategoryBox /></section>
-    <section><SomeProducts title="Popular Products" /></section>
+    <section>
+      <SomeProducts title="Popular Products" path="/api/shop/latest/" />
+    </section>
     <section><ProductOffer /></section>
     <section><Feature /></section>
     <section><Subscribe /></section>
@@ -27,6 +31,9 @@ export default {
     ProductOffer,
     Feature,
     Subscribe,
+  },
+  mounted() {
+    document.title = "Mens Fashion";
   },
 };
 </script>

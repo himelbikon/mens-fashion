@@ -4,6 +4,8 @@ export default createStore({
   state: {
     token: "",
     cart: [],
+    url: "http://127.0.0.1:8000",
+    sitename: " | Mens Fashion",
   },
   mutations: {},
   actions: {},

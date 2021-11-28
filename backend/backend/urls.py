@@ -23,9 +23,15 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='index.html')),
-    # handling spa application
-    re_path(r'^(?P<path>.*)$', TemplateView.as_view(template_name='index.html')),
+
+    # apps path
+    path('api/shop/', include('shop.urls')),
+
 ]
 
-
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# handling spa application
+urlpatterns += [
+    re_path(r'^(?P<path>.*)$', TemplateView.as_view(template_name='index.html'))
+]

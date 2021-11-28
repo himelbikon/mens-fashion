@@ -3,14 +3,21 @@
     <div class="bg-white shadow">
       <div>
         <img
+          :src="`${this.$store.state.url}${product.image}`"
+          :alt="`${this.$store.state.url}${product.image}`"
+          class="img-fluid w-100"
+          v-if="product.image"
+        />
+        <img
           src="https://via.placeholder.com/500x500"
           alt=""
           class="img-fluid w-100"
+          v-else
         />
       </div>
       <div class="p-2">
-        <h5>Men Nice</h5>
-        <p>Price: $90</p>
+        <h5>{{ product.name }}</h5>
+        <p>Price: ${{ product.price }}</p>
       </div>
     </div>
   </div>
@@ -19,6 +26,8 @@
 <script>
 export default {
   name: "product-box",
-  props: {},
+  props: {
+    product: Object,
+  },
 };
 </script>
