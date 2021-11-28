@@ -2,7 +2,7 @@
   <div class="product-offer">
     <div class="container mt-5 bg-white p-5">
       <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-6 mb-3">
           <img
             src="https://via.placeholder.com/500x500"
             alt=""
@@ -10,7 +10,7 @@
           />
         </div>
 
-        <div class="col-12 col-lg-6 my-3">
+        <div class="col-12 col-lg-6">
           <div class="">
             <h3>Smart Watch</h3>
             <div>
