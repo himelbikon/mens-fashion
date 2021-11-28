@@ -41,7 +41,7 @@
         </div>
         <div class="col-12 col-md-4 my-3">
           <h3>Quick Links</h3>
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center flex-wrap">
             <router-link
               :to="{ name: 'home' }"
               class="m-2 py-2 px-4 bg-light text-dark rounded-pill"

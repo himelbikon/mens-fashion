@@ -8,3 +8,9 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     extra_kwargs = {'ratings': {'write_only': True}}
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'image']

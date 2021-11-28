@@ -2,11 +2,11 @@
   <div class="home">
     <section><Carousel /></section>
     <section>
-      <SomeProducts title="Latest Products" path="/api/shop/latest/" />
+      <SomeProducts title="Latest Products" path="/api/shop/latest/8/" />
     </section>
     <section><CategoryBox /></section>
     <section>
-      <SomeProducts title="Popular Products" path="/api/shop/latest/" />
+      <SomeProducts title="Popular Products" path="/api/shop/popular/8/" />
     </section>
     <section><ProductOffer /></section>
     <section><Feature /></section>
