@@ -4,11 +4,13 @@
       <h1 class="text-center">{{ title }}</h1>
 
       <div class="row my-4">
-        <ProductBox
+        <div
+          class="col-12 col-md-6 col-lg-3 my-4"
           v-for="product in products"
           :key="product.id"
-          :product="product"
-        />
+        >
+          <ProductBox :product="product" />
+        </div>
       </div>
 
       <div class="text-center mb-5">

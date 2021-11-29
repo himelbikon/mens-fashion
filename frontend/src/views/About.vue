@@ -9,5 +9,8 @@
 <script>
 export default {
   name: "about",
+  mounted() {
+    document.title = "About" + this.$store.state.sitename;
+  },
 };
 </script>

@@ -67,3 +67,25 @@ class Product(models.Model):
         size = (width, height)
         img = img.resize(size)
         img.save(image.path)
+
+
+class Showcase(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product.name
+
+    def name(self):
+        return self.product.name
+
+    def image(self):
+        if self.product.image:
+            return self.product.image.url
+        else:
+            return ''
+
+    def details(self):
+        return self.product.details[0:300]
+
+    def product_id(self):
+        return self.product.id

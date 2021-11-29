@@ -18,6 +18,13 @@ export default {
     Header,
     Footer,
   },
+   watch: {
+    $route(to, from) {
+      if (to != from) {
+        window.scroll(0, 0);
+      }
+    },
+  },
 };
 </script>
 

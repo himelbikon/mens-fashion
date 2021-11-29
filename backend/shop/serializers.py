@@ -14,3 +14,9 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'image']
+
+
+class ShowcaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Showcase
+        fields = ['id', 'name',  'details', 'product_id', 'image']

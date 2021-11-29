@@ -1,7 +1,7 @@
 <template>
-  <div class="col-12 col-md-6 col-lg-3 my-4">
-    <div class="bg-white shadow">
-      <div>
+  <div class="bg-white shadow">
+    <div>
+      <router-link :to="{ name: 'product', params: { id: product.id } }">
         <img
           :src="`${this.$store.state.url}${product.image}`"
           :alt="`${this.$store.state.url}${product.image}`"
@@ -14,11 +14,15 @@
           class="img-fluid w-100"
           v-else
         />
-      </div>
-      <div class="p-2">
-        <h5>{{ product.name }}</h5>
-        <p>Price: ${{ product.price }}</p>
-      </div>
+      </router-link>
+    </div>
+    <div class="p-2">
+      <h5>
+        <router-link :to="{ name: 'product', params: { id: product.id } }">
+          {{ product.name }}
+        </router-link>
+      </h5>
+      <p>Price: ${{ product.price }}</p>
     </div>
   </div>
 </template>
@@ -31,3 +35,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>

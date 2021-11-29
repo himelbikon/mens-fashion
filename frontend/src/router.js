@@ -4,6 +4,9 @@ import store from "./store";
 import Home from "@/views/Home";
 import About from "@/views/About";
 import Login from "@/views/Login";
+import Product from "@/views/Product";
+import Shop from "@/views/Shop";
+import Test from "@/views/Test";
 
 const routes = [
   {
@@ -12,23 +15,30 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
+    path: "/test/",
+    name: "test",
+    component: Test,
+  },
+  {
+    path: "/about/",
     name: "about",
     component: About,
   },
   {
-    path: "/login",
+    path: "/login/",
     name: "login",
     component: Login,
   },
-  // {
-  //   path: "/checkout",
-  //   name: "checkout",
-  //   component: Checkout,
-  //   meta: {
-  //     requireLogin: true,
-  //   },
-  // },
+  {
+    path: "/products/:id/",
+    name: "product",
+    component: Product,
+  },
+  {
+    path: "/shop/",
+    name: "shop",
+    component: Shop,
+  },
 ];
 
 const router = createRouter({

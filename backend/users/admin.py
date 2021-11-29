@@ -8,3 +8,4 @@ class SuperUser(UserAdmin):
 
 
 admin.site.register(User, SuperUser)
+admin.site.register(Subscription)

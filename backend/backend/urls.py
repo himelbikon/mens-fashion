@@ -26,6 +26,7 @@ urlpatterns = [
 
     # apps path
     path('api/shop/', include('shop.urls')),
+    path('api/users/', include('users.urls')),
 
 ]
 

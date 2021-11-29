@@ -20,25 +20,18 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <router-link
-                :to="{ name: 'home' }"
-                class="nav-link active"
-                href="#"
+              <router-link :to="{ name: 'home' }" class="nav-link"
                 >Home
                 <span class="visually-hidden">(current)</span>
               </router-link>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'about' }" class="nav-link" href="#"
-                >About</router-link
+              <router-link :to="{ name: 'shop' }" class="nav-link"
+                >Shop</router-link
               >
             </li>
+
             <li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
@@ -56,6 +49,12 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Separated link</a>
               </div>
+            </li>
+
+            <li class="nav-item">
+              <router-link :to="{ name: 'about' }" class="nav-link" href="#"
+                >About</router-link
+              >
             </li>
           </ul>
           <div class="form-group mx-3">

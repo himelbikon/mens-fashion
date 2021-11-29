@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from users.models import User
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -18,3 +18,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = ['id', 'email']

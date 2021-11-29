@@ -4,9 +4,9 @@
       <div class="row">
         <div class="col-12 col-md-4 my-3">
           <h3>
-            <router-link :to="{ name: 'home' }" class="navbar-brand" href="#"
-              >Mens Fashion</router-link
-            >
+            <router-link :to="{ name: 'home' }" class=""
+              >Mens Fashion
+            </router-link>
           </h3>
           <div>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -40,33 +40,16 @@
           </ul>
         </div>
         <div class="col-12 col-md-4 my-3">
-          <h3>Quick Links</h3>
+          <h3>Categories</h3>
           <div class="d-flex justify-content-center flex-wrap">
             <router-link
               :to="{ name: 'home' }"
               class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
-              >Men</router-link
+              v-for="category in this.$store.state.categories"
+              :key="category.id"
             >
-            <router-link
-              :to="{ name: 'home' }"
-              class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
-              >Women</router-link
-            >
-            <router-link
-              :to="{ name: 'home' }"
-              class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
-              >Men</router-link
-            >
-            <router-link
-              :to="{ name: 'home' }"
-              class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
-              >Women</router-link
-            >
-            <router-link
-              :to="{ name: 'home' }"
-              class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
-              >Men</router-link
-            >
+              {{ category.name }}
+            </router-link>
           </div>
         </div>
       </div>

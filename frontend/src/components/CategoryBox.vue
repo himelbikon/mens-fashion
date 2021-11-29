@@ -52,6 +52,7 @@ export default {
       .get("/api/shop/categories/")
       .then((response) => {
         this.categories = response.data;
+        this.$store.state.categories = response.data;
       })
       .catch((error) => {
         if (error.response) {

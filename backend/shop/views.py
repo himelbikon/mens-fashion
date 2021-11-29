@@ -14,21 +14,16 @@ class SingleProduct(APIView):
 
 
 class LatestProducts(APIView):
-    def get(self, request, limit=None):
-        if limit:
-            products = Product.objects.all()[0:limit]
-        else:
-            products = Product.objects.all()
+    def get(self, request, limit, page):
+        products = Product.objects.all()[(page-1) * limit: page * limit]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
 
 class PopularProducts(APIView):
-    def get(self, request, limit=None):
-        if limit:
-            products = Product.objects.all().order_by('-views')[0:limit]
-        else:
-            products = Product.objects.all().order_by('-views')
+    def get(self, request, limit, page):
+        products = Product.objects.all().order_by(
+            '-views')[(page-1) * limit: page * limit]
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
@@ -37,6 +32,11 @@ class Categories(APIView):
     def get(self, request):
         categories = Category.objects.all()
         serializer = CategorySerializer(categories, many=True)
-        # products = Product.objects.all().order_by('-views')
-        # serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+class Showcases(APIView):
+    def get(self, request):
+        products = Showcase.objects.all()
+        serializer = ShowcaseSerializer(products, many=True)
         return Response(serializer.data)
