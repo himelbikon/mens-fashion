@@ -54,19 +54,24 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get("/api/shop/showcases/")
-      .then((response) => {
-        this.showcases = response.data;
-        console.log(response.data);
-      })
-      .catch((error) => {
-        if (error.message) {
-          console.log(JSON.stringify(error.response.data));
-        } else {
-          console.log("Something is wrong");
-        }
-      });
+    this.getShowcase();
+  },
+  methods: {
+    async getShowcase() {
+      await axios
+        .get("/api/shop/showcases/")
+        .then((response) => {
+          this.showcases = response.data;
+          console.log(response.data);
+        })
+        .catch((error) => {
+          if (error.message) {
+            console.log(JSON.stringify(error.response.data));
+          } else {
+            console.log("Something is wrong");
+          }
+        });
+    },
   },
 };
 </script>

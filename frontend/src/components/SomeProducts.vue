@@ -5,7 +5,7 @@
 
       <div class="row my-4">
         <div
-          class="col-12 col-md-6 col-lg-3 my-4"
+          class="col-12 col-md-6 col-lg-3 my-3"
           v-for="product in products"
           :key="product.id"
         >
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     async getProducts() {
-      axios
+      await axios
         .get(this.path)
         .then((response) => {
           this.products = response.data;

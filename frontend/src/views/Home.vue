@@ -2,12 +2,17 @@
   <div class="home">
     <section><Carousel /></section>
     <section>
-      <SomeProducts title="Latest Products" path="/api/shop/latest/8/1/" />
-      <!-- /api/shop/latest/{limit}/{page}/ limit is home many and page is like pagination  -->
+      <SomeProducts
+        title="Latest Products"
+        path="/api/shop/products?limit=8&page=1"
+      />
     </section>
     <section><CategoryBox /></section>
     <section>
-      <SomeProducts title="Popular Products" path="/api/shop/popular/8/1/" />
+      <SomeProducts
+        title="Most Viewed Products"
+        path="/api/shop/products?limit=8&page=1&orderby=views"
+      />
     </section>
     <section><ProductShowcase /></section>
     <section><Feature /></section>

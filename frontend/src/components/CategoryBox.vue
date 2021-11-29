@@ -5,7 +5,7 @@
       <div class="row d-flex justify-content-center">
         <div
           class="col-5 col-md-3 col-lg-2 my-1"
-          v-for="category in categories"
+          v-for="category in this.$store.state.categories"
           :key="category.id"
         >
           <div class="bg-white text-center rounded">
@@ -38,28 +38,12 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   name: "category-box",
   data() {
-    return {
-      categories: [],
-    };
+    return {};
   },
-  mounted() {
-    axios
-      .get("/api/shop/categories/")
-      .then((response) => {
-        this.categories = response.data;
-        this.$store.state.categories = response.data;
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log(JSON.stringify(error.response.data));
-        }
-      });
-  },
+  mounted() {},
 };
 </script>
 

@@ -84,10 +84,10 @@ export default {
     };
   },
   methods: {
-    postSubscribe() {
+    async postSubscribe() {
       this.alert = "";
       if (this.email) {
-        axios
+        await axios
           .post("/api/users/subscribe/", { email: this.email })
           .then(() => {
             this.subscribed = true;

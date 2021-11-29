@@ -5,12 +5,14 @@ from users.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
+    slug = models.CharField(max_length=30, unique=True, blank=True)
     image = models.ImageField(upload_to='category', blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
 
     def save(self, *args, **kwargs):
+        self.slug = self.name.replace(' ', '-').lower()
         super(Category, self).save(*args, **kwargs)
 
         if self.image:

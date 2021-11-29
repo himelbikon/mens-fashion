@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -18,11 +20,28 @@ export default {
     Header,
     Footer,
   },
-   watch: {
+  mounted() {
+    this.setCategories();
+  },
+  watch: {
     $route(to, from) {
       if (to != from) {
         window.scroll(0, 0);
       }
+    },
+  },
+  methods: {
+    async setCategories() {
+      await axios
+        .get("/api/shop/categories/")
+        .then((response) => {
+          this.$store.state.categories = response.data;
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(JSON.stringify(error.response.data));
+          }
+        });
     },
   },
 };
