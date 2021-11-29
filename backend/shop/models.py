@@ -5,7 +5,7 @@ from users.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    slug = models.CharField(max_length=30, unique=True, blank=True)
+    slug = models.CharField(max_length=30, unique=True, blank=True, null=True)
     image = models.ImageField(upload_to='category', blank=True, null=True)
 
     def __str__(self):
