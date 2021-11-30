@@ -1,7 +1,7 @@
 <template>
   <div class="cart">
-    <div class="container">
-      <table class="table">
+    <div class="container bg-white my-2">
+      <table class="table" v-if="this.$store.state.cart.length">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -9,12 +9,12 @@
             <th scope="col">Price</th>
             <th scope="col">Quantity</th>
             <th scope="col">Full Price</th>
-            <th scope="col">Action</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            class="table-secondary"
+            class="text-dark"
             v-for="(item, key) in this.$store.state.cart"
             :key="item.id"
           >
@@ -26,13 +26,48 @@
                 {{ item.product.name }}
               </router-link>
             </td>
-            <td>{{ item.product.price }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.product.price * item.quantity }}</td>
-            <td><button class="btn btn-outline-danger btn-sm">x</button></td>
+            <td>${{ item.product.price }}</td>
+            <td>
+              {{ item.quantity }}
+            </td>
+            <td>${{ item.product.price * item.quantity }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm me-2"
+                @click="decreaseCart(item.product.id)"
+              >
+                -
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm ms-2"
+                @click="increaseCart(item.product.id)"
+              >
+                +
+              </button>
+
+              <button
+                class="btn btn-outline-danger btn-sm mx-4"
+                @click="deleteFromCart(item.product.id)"
+              >
+                x
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+
+      <h5 class="p-2 text-center" v-else>No products in cart!</h5>
+    </div>
+
+    <div class="container my-2">
+      <h4>Total Price: $456</h4>
+      <router-link
+        class="btn btn-outline-primary text-white"
+        :to="{ name: 'checkout' }"
+        >Checkout</router-link
+      >
     </div>
   </div>
 </template>
@@ -43,6 +78,17 @@ export default {
   name: "cart",
   mounted() {
     document.title = "Cart" + this.$store.state.sitename;
+  },
+  methods: {
+    increaseCart(id) {
+      this.$store.commit("increaseCart", id);
+    },
+    decreaseCart(id) {
+      this.$store.commit("decreaseCart", id);
+    },
+    deleteFromCart(id) {
+      this.$store.commit("deleteFromCart", id);
+    },
   },
 };
 </script>
