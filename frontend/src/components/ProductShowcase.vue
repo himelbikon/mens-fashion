@@ -62,7 +62,7 @@ export default {
         .get("/api/shop/showcases/")
         .then((response) => {
           this.showcases = response.data;
-          console.log(response.data);
+          // console.log(response.data);
         })
         .catch((error) => {
           if (error.message) {

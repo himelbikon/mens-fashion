@@ -10,7 +10,9 @@
         >
           <div class="bg-white text-center rounded">
             <div>
-              <router-link :to="{ name: 'home' }">
+              <router-link
+                :to="{ name: 'shop', query: { category: category.slug } }"
+              >
                 <img
                   :src="`${this.$store.state.url}${category.image}`"
                   :alt="`${this.$store.state.url}${category.image}`"
@@ -26,7 +28,9 @@
               </router-link>
             </div>
             <h6 class="p-1">
-              <router-link :to="{ name: 'home' }">
+              <router-link
+                :to="{ name: 'shop', query: { category: category.slug } }"
+              >
                 {{ category.name }}
               </router-link>
             </h6>

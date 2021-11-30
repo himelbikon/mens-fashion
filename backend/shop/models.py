@@ -70,6 +70,9 @@ class Product(models.Model):
         img = img.resize(size)
         img.save(image.path)
 
+    def category_name(self):
+        return self.category.name
+
 
 class Showcase(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

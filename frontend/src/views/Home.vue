@@ -12,6 +12,8 @@
       <SomeProducts
         title="Most Viewed Products"
         path="/api/shop/products?limit=8&page=1&orderby=views"
+        orderby="orderby"
+        getParam="views"
       />
     </section>
     <section><ProductShowcase /></section>

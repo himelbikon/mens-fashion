@@ -2,7 +2,7 @@
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <router-link :to="{ name: 'home' }" class="navbar-brand" href="#"
+        <router-link :to="{ name: 'home' }" class="navbar-brand"
           >Mens Fashion</router-link
         >
         <button

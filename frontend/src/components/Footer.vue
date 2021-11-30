@@ -43,7 +43,7 @@
           <h3>Categories</h3>
           <div class="d-flex justify-content-center flex-wrap">
             <router-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'shop', query: { category: category.slug } }"
               class="m-2 py-2 px-4 bg-light text-dark rounded-pill"
               v-for="category in this.$store.state.categories"
               :key="category.id"

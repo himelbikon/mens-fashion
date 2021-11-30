@@ -15,9 +15,18 @@
 
       <div class="text-center mb-5">
         <router-link
-          :to="{ name: 'home' }"
+          :to="{ name: 'shop', query: { orderby: getParam } }"
           type="button"
           class="btn btn-outline-primary"
+          v-if="orderby"
+        >
+          View All Products
+        </router-link>
+        <router-link
+          :to="{ name: 'shop' }"
+          type="button"
+          class="btn btn-outline-primary"
+          v-else
         >
           View All Products
         </router-link>
@@ -42,8 +51,11 @@ export default {
   props: {
     title: String,
     path: String,
+    orderby: String,
+    getParam: String,
   },
   mounted() {
+    console.log("some products.vue");
     this.getProducts();
   },
   methods: {

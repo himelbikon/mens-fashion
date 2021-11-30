@@ -8,11 +8,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print('<<< --- Product Populating Starts Now --- >>>')
         number = int(input('How many: '))
-        for _ in range(number):
-            self.create()
+        for i in range(number):
+            self.create(i)
         print('<<< --- Product Populating Ends Now --- >>>')
 
-    def create(self):
+    def create(self, serial):
         faker = Faker()
         categories = Category.objects.all()
 
@@ -25,7 +25,7 @@ class Command(BaseCommand):
             )
 
             product.save()
-            print(product)
+            print(f'[{serial}]', product)
 
         except Exception as e:
             print(e)
