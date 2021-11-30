@@ -52,9 +52,14 @@
             </li>
 
             <li class="nav-item">
-              <router-link :to="{ name: 'about' }" class="nav-link" href="#"
+              <router-link :to="{ name: 'about' }" class="nav-link"
                 >About</router-link
               >
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'cart' }" class="nav-link"
+                >Cart ({{ this.$store.state.cart.length }})
+              </router-link>
             </li>
           </ul>
           <div class="form-group mx-3">

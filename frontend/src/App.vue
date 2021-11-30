@@ -21,6 +21,7 @@ export default {
     Footer,
   },
   mounted() {
+    this.$store.commit("initStore");
     this.setCategories();
   },
   watch: {

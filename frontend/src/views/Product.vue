@@ -67,13 +67,15 @@
         </div>
         <!-- column divider -->
         <div class="col-12 col-lg-6">
-          <h4 class="fw-bold mb-3">{{ product.name }}</h4>
-          <div>Price: {{ product.price }}</div>
-          <div>Category: {{ product.category_name }}</div>
-          <div>Viewed: {{ product.views }}</div>
-          <p class="my-2" v-if="product.details">
-            {{ product.details.substring(0, 200).concat("...") }}
-          </p>
+          <div>
+            <h4 class="fw-bold mb-3">{{ product.name }}</h4>
+            <div>Price: {{ product.price }}</div>
+            <div>Category: {{ product.category_name }}</div>
+            <div>Viewed: {{ product.views }}</div>
+            <p class="my-2" v-if="product.details">
+              {{ product.details.substring(0, 200).concat("...") }}
+            </p>
+          </div>
           <hr />
 
           <div class="input-group mb-3 w-75">
@@ -81,15 +83,41 @@
               type="number"
               min="1"
               class="form-control mx-3"
-              aria-label="Recipient's username"
               aria-describedby="button-addon2"
+              v-model="quantity"
             />
             <button
               class="btn btn-primary rounded-1"
               type="button"
               id="button-addon2"
+              @click="addToCart()"
             >
               Add To Cart
+            </button>
+          </div>
+
+          <div class="py-2 w-75" v-if="quantityInCart">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm me-2"
+              @click="decreaseCart()"
+            >
+              -
+            </button>
+            {{ quantityInCart }}
+            <button
+              type="button"
+              class="btn btn-primary btn-sm ms-2"
+              @click="increaseCart()"
+            >
+              +
+            </button>
+
+            <button
+              class="btn btn-outline-danger btn-sm mx-4"
+              @click="deleteFromCart()"
+            >
+              x
             </button>
           </div>
         </div>
@@ -105,7 +133,9 @@ export default {
   name: "product",
   data() {
     return {
-      product: "",
+      product: {},
+      quantity: 1,
+      quantityInCart: 0,
       bigImg: "",
     };
   },
@@ -116,11 +146,12 @@ export default {
   },
   methods: {
     async getProduct() {
-      // console.log(this.$route.params);
       await axios
         .get(`/api/shop/products/${this.$route.params.id}/`)
         .then((response) => {
           this.product = response.data;
+          this.setQuantity();
+
           if (response.data.image) {
             this.bigImg = response.data.image;
           }
@@ -136,7 +167,34 @@ export default {
     setBigImg(img) {
       this.bigImg = img;
     },
+    addToCart() {
+      const obj = { product: this.product, quantity: this.quantity };
+      this.$store.commit("addToCart", obj);
+      this.setQuantity();
+    },
+    deleteFromCart() {
+      this.$store.commit("deleteFromCart", this.product.id);
+      this.setQuantity();
+    },
+    setQuantity() {
+      this.$store.state.cart.map((item) => {
+        if (item.product.id === this.product.id) {
+          this.quantityInCart = item.quantity;
+        } else {
+          this.quantityInCart = 0;
+        }
+      });
+    },
+    increaseCart() {
+      this.$store.commit("increaseCart", this.product.id);
+      this.setQuantity();
+    },
+    decreaseCart() {
+      this.$store.commit("decreaseCart", this.product.id);
+      this.setQuantity();
+    },
   },
+  computed: {},
 };
 </script>
 

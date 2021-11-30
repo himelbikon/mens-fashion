@@ -6,6 +6,7 @@ import About from "@/views/About";
 import Login from "@/views/Login";
 import Product from "@/views/Product";
 import Shop from "@/views/Shop";
+import Cart from "@/views/Cart";
 import Test from "@/views/Test";
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: "/shop",
     name: "shop",
     component: Shop,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: Cart,
   },
 ];
 

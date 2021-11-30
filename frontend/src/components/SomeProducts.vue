@@ -55,7 +55,6 @@ export default {
     getParam: String,
   },
   mounted() {
-    console.log("some products.vue");
     this.getProducts();
   },
   methods: {
