@@ -92,7 +92,7 @@
               id="button-addon2"
               @click="addToCart()"
             >
-              Add To Cart
+              Add To Cart {{ quantityInCart }}
             </button>
           </div>
 
@@ -123,11 +123,27 @@
         </div>
       </div>
     </div>
+
+    <div class="container bg-white py-2 my-2">
+      <h3 class="text-center my-3">{{ product.name }} details</h3>
+
+      <div>{{ product.details }}</div>
+    </div>
+
+    <div class="container bg-light pb-2" v-if="categorySlug">
+      <SomeProducts
+        title="Most Viewed Products"
+        :path="`/api/shop/products?limit=8&page=1&category=${categorySlug}`"
+        nolink="false"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
+import SomeProducts from "@/components/SomeProducts";
 
 export default {
   name: "product",
@@ -137,12 +153,20 @@ export default {
       quantity: 1,
       quantityInCart: 0,
       bigImg: "",
+      categorySlug: "",
     };
   },
   mounted() {
     document.title = "Product" + this.$store.state.sitename;
-
     this.getProduct();
+  },
+  components: { SomeProducts },
+  watch: {
+    $route(to, from) {
+      if (to != from) {
+        this.getProduct();
+      }
+    },
   },
   methods: {
     async getProduct() {
@@ -151,9 +175,14 @@ export default {
         .then((response) => {
           this.product = response.data;
           this.setQuantity();
+          this.categorySlug = response.data.category_name
+            .replace(" ", "-")
+            .toLowerCase();
 
           if (response.data.image) {
             this.bigImg = response.data.image;
+          } else {
+            this.bigImg = "";
           }
         })
         .catch((error) => {
@@ -177,13 +206,18 @@ export default {
       this.setQuantity();
     },
     setQuantity() {
+      let set_quantity = false;
+
       this.$store.state.cart.map((item) => {
         if (item.product.id === this.product.id) {
           this.quantityInCart = item.quantity;
-        } else {
-          this.quantityInCart = 0;
+          set_quantity = true;
         }
       });
+
+      if (!set_quantity) {
+        this.quantityInCart = 0;
+      }
     },
     increaseCart() {
       this.$store.commit("increaseCart", this.product.id);

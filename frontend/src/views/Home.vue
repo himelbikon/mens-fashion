@@ -5,6 +5,7 @@
       <SomeProducts
         title="Latest Products"
         path="/api/shop/products?limit=8&page=1"
+        btnlink="true"
       />
     </section>
     <section><CategoryBox /></section>
@@ -14,6 +15,7 @@
         path="/api/shop/products?limit=8&page=1&orderby=views"
         orderby="orderby"
         getParam="views"
+        btnlink="true"
       />
     </section>
     <section><ProductShowcase /></section>

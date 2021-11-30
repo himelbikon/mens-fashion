@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div class="text-center mb-5">
+      <div class="text-center mb-5" v-if="btnlink">
         <router-link
           :to="{ name: 'shop', query: { orderby: getParam } }"
           type="button"
@@ -53,6 +53,7 @@ export default {
     path: String,
     orderby: String,
     getParam: String,
+    btnlink: Boolean,
   },
   mounted() {
     this.getProducts();

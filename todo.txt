@@ -1,1 +1,2 @@
 01. Add url in store state
+02. Change databases in django settings
