@@ -61,8 +61,8 @@
       <h5 class="p-2 text-center" v-else>No products in cart!</h5>
     </div>
 
-    <div class="container my-2">
-      <h4>Total Price: $456</h4>
+    <div class="container my-2 bg-white py-2">
+      <h5 class="my-4">Total Price: ${{ totalCartPrice }}</h5>
       <router-link
         class="btn btn-outline-primary text-white"
         :to="{ name: 'checkout' }"
@@ -88,6 +88,17 @@ export default {
     },
     deleteFromCart(id) {
       this.$store.commit("deleteFromCart", id);
+    },
+  },
+  computed: {
+    totalCartPrice() {
+      let price = 0;
+
+      this.$store.state.cart.map((i) => {
+        price += i.product.price * i.quantity;
+      });
+
+      return price;
     },
   },
 };

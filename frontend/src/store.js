@@ -4,6 +4,7 @@ export default createStore({
   state: {
     token: "",
     cart: [],
+    isAuthenticated: false,
     // url: "https://himelbikon.pythonanywhere.com/",
     url: "http://127.0.0.1:8000",
     sitename: " | Mens Fashion",
@@ -14,6 +15,22 @@ export default createStore({
       if (localStorage.getItem("cart")) {
         state.cart = JSON.parse(localStorage.getItem("cart"));
       }
+      if (localStorage.getItem("token")) {
+        state.token = JSON.parse(localStorage.getItem("token"));
+        state.isAuthenticated = true;
+      }
+    },
+    setLogin(state, token) {
+      state.isAuthenticated = true;
+      state.token = token;
+
+      localStorage.setItem("token", JSON.stringify(token));
+    },
+    setLogout(state) {
+      state.isAuthenticated = false;
+      state.token = "";
+
+      localStorage.removeItem("token");
     },
     addToCart(state, obj) {
       const exists = state.cart.filter((i) => {

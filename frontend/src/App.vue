@@ -23,6 +23,9 @@ export default {
   mounted() {
     this.$store.commit("initStore");
     this.setCategories();
+    if (this.$store.state.token) {
+      this.getProfile();
+    }
   },
   watch: {
     $route(to, from) {
@@ -42,6 +45,19 @@ export default {
           if (error.response) {
             console.log(JSON.stringify(error.response.data));
           }
+        });
+    },
+    async getProfile() {
+      await axios
+        .get("/api/users/profile/")
+        .then(() => {
+          console.log("Logged in user!");
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+          }
+          this.$store.commit("setLogout");
         });
     },
   },

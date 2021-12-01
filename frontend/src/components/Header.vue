@@ -32,7 +32,10 @@
               >
             </li>
 
-            <li class="nav-item dropdown">
+            <li
+              class="nav-item dropdown"
+              v-if="this.$store.state.isAuthenticated"
+            >
               <a
                 class="nav-link dropdown-toggle"
                 data-bs-toggle="dropdown"
@@ -40,20 +43,25 @@
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
-                >Dropdown</a
+                >User</a
               >
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+                <button class="dropdown-item" @click="logout">Logout</button>
               </div>
             </li>
 
             <li class="nav-item">
               <router-link :to="{ name: 'about' }" class="nav-link"
                 >About</router-link
+              >
+            </li>
+            <li class="nav-item" v-if="!this.$store.state.isAuthenticated">
+              <router-link :to="{ name: 'login' }" class="nav-link"
+                >Login</router-link
               >
             </li>
             <li class="nav-item">
@@ -88,5 +96,11 @@
 <script>
 export default {
   name: "header",
+  methods: {
+    logout() {
+      this.$store.commit("setLogout");
+      this.$router.push({ name: "home" });
+    },
+  },
 };
 </script>
