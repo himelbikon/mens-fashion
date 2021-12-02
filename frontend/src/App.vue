@@ -26,6 +26,7 @@ export default {
     if (this.$store.state.token) {
       this.getProfile();
     }
+    // this.$router.push({ name: "orders" });
   },
   watch: {
     $route(to, from) {

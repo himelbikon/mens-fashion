@@ -20,8 +20,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'image5',
         ]
 
-    # extra_kwargs = {'ratings': {'write_only': True}}
-
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,3 +31,42 @@ class ShowcaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Showcase
         fields = ['id', 'name',  'details', 'product_id', 'image']
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+        read_only_fields = ('order',)
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = [
+            'id',
+            'user',
+            'first_name',
+            'last_name',
+            'email',
+            'phone',
+            'address',
+            'zipcode',
+            'place',
+            'created_at',
+            'paid_amount',
+            'token',
+            'delivered',
+            'items'
+        ]
+
+    def create(self, validated_data):
+        items = validated_data.pop('items')
+        order = Order.objects.create(**validated_data)
+
+        for item in items:
+            OrderItem.objects.create(**item, order=order)
+
+        return order

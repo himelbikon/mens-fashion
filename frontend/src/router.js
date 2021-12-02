@@ -8,6 +8,7 @@ import Product from "@/views/Product";
 import Shop from "@/views/Shop";
 import Cart from "@/views/Cart";
 import Checkout from "@/views/Checkout";
+import Orders from "@/views/Orders";
 // import Test from "@/views/Test";
 
 const routes = [
@@ -32,7 +33,7 @@ const routes = [
     component: Login,
   },
   {
-    path: "/products/:id/",
+    path: "/shop/products/:id/",
     name: "product",
     component: Product,
   },
@@ -50,6 +51,14 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: Checkout,
+    meta: {
+      requireLogin: true,
+    },
+  },
+  {
+    path: "/orders",
+    name: "orders",
+    component: Orders,
     meta: {
       requireLogin: true,
     },

@@ -94,3 +94,45 @@ class Showcase(models.Model):
 
     def product_id(self):
         return self.product.id
+
+
+class Order(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE)
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    address = models.CharField(max_length=255)
+    zipcode = models.CharField(max_length=100)
+    place = models.CharField(max_length=100)
+
+    paid_amount = models.DecimalField(
+        max_digits=8, decimal_places=2, null=True)
+
+    token = models.CharField(max_length=200)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    delivered = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}: {self.token}'
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name='items')
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    quantity = models.IntegerField(default=1)
+
+    class Meta:
+        ordering = ['-id']
+
+    def __str__(self):
+        return f'{self.id}: {self.product.name}'

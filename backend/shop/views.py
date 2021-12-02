@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 
 class SingleProduct(APIView):
@@ -47,4 +48,21 @@ class Showcases(APIView):
     def get(self, request):
         products = Showcase.objects.all()
         serializer = ShowcaseSerializer(products, many=True)
+        return Response(serializer.data)
+
+
+class OrdersView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        orders = Order.objects.filter(user=request.user)
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = request.data
+        data['user'] = request.user.id
+        serializer = OrderSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data)

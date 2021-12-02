@@ -36,7 +36,7 @@
         <div class="col-12 col-md-6 bg-white">
           <h5 class="py-2">Shipping details</h5>
 
-          <form>
+          <form v-if="this.$store.state.cart.length">
             <div class="form-group mb-4">
               <label class="form-label" for="inputDefault">First Name</label>
               <input
@@ -106,17 +106,32 @@
               />
             </div>
 
+            <div class="form-group mb-4">
+              <label class="form-label" for="inputDefault">Place</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Place"
+                id="inputDefault"
+                v-model="place"
+              />
+            </div>
+
             <div class="alert alert-danger" v-if="errors.length">
               <div v-for="error in errors" :key="error">{{ error }}</div>
             </div>
 
-            <button
+            <!-- <button
               type="button"
               class="btn btn-outline-primary my-2"
               @click="orderHandler"
             >
               Submit
-            </button>
+            </button> -->
+
+            <div>
+              <div ref="paypal"></div>
+            </div>
           </form>
         </div>
       </div>
@@ -125,11 +140,14 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "checkout",
   data() {
     return {
       no_blank: false,
+      loaded: false,
+      paidFor: false,
       cart: {},
       items: [],
       errors: [],
@@ -150,8 +168,50 @@ export default {
     this.totalCartPrice();
     this.collectItems();
     this.generateToken();
+    this.mountPaypal();
   },
   methods: {
+    mountPaypal: function () {
+      const script = document.createElement("script");
+      script.src =
+        "https://www.paypal.com/sdk/js?client-id=AbzYFUyRQHaRRb0NQ6vsehobiGBGwcFjcJBlMIxrfbzy_mFH4nklge6-raop0Nk9YW2Ryulu9Z0yPI_z";
+      // AbzYFUyRQHaRRb0NQ6vsehobiGBGwcFjcJBlMIxrfbzy_mFH4nklge6-raop0Nk9YW2Ryulu9Z0yPI_z
+      script.addEventListener("load", this.setLoaded);
+      document.body.appendChild(script);
+    },
+    setLoaded: function () {
+      this.loaded = true;
+      window.paypal
+        .Buttons({
+          createOrder: (data, actions) => {
+            this.blankChecker();
+            if (this.no_blank) {
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    description: this.token,
+                    amount: {
+                      currency_code: "USD",
+                      value: this.totalPrice,
+                    },
+                  },
+                ],
+              });
+            }
+          },
+          onApprove: async (data, actions) => {
+            const order = await actions.order.capture();
+            this.data;
+            this.paidFor = true;
+            console.log(order);
+            this.orderHandler();
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        })
+        .render(this.$refs.paypal);
+    },
     totalCartPrice() {
       let price = 0;
       this.cart.map((i) => {
@@ -160,9 +220,7 @@ export default {
 
       this.totalPrice = price;
     },
-    orderHandler() {
-      // console.log("create order");
-
+    async orderHandler() {
       const data = {
         first_name: this.first_name,
         last_name: this.last_name,
@@ -172,15 +230,27 @@ export default {
         zipcode: this.zipcode,
         place: this.place,
         token: this.token,
-        total_price: this.totalPrice,
-        items: [],
+        paid_amount: this.totalPrice,
+        items: this.items,
       };
 
-      this.blankChecker();
-
-      if (this.no_blank) {
-        console.log(data);
-      }
+      await axios
+        .post("/api/shop/orders/", data)
+        .then(() => {
+          this.$store.commit("clearCart");
+          this.$router.push({ name: "orders" });
+        })
+        .catch((error) => {
+          if (error.response) {
+            for (const property in error.response.data) {
+              this.errors.push(`${property}: ${error.response.data[property]}`);
+            }
+            console.log(JSON.stringify(error.response.data));
+          } else if (error.message) {
+            this.error.push("Something went wrong. Please try later!");
+            console.log(JSON.stringify(error));
+          }
+        });
     },
     blankChecker() {
       this.errors = [];
@@ -197,6 +267,8 @@ export default {
         this.errors.push("Enter address");
       } else if (this.zipcode === "") {
         this.errors.push("Enter zipcode");
+      } else if (this.place === "") {
+        this.errors.push("Enter place");
       } else {
         this.no_blank = true;
       }
