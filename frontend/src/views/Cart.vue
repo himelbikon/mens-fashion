@@ -7,7 +7,7 @@
             <th scope="col">#</th>
             <th scope="col">Name</th>
             <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">Qty</th>
             <th scope="col">Full Price</th>
             <th scope="col">Actions</th>
           </tr>
