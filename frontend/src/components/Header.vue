@@ -3,7 +3,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <router-link :to="{ name: 'home' }" class="navbar-brand"
-          >Mens Fashion</router-link
+          >
+          <img class="img-fluid" src="../assets/a.png" style="width: 50px" />
+          </router-link
         >
         <button
           class="navbar-toggler"
@@ -18,7 +20,25 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor03">
-          <ul class="navbar-nav me-auto">
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                class="form-control me-sm-2 px-3"
+                type="text"
+                placeholder="Search"
+                aria-describedby="button-addon2"
+              />
+              <button
+                class="btn btn-secondary my-2 my-sm-0 rounded-1"
+                type="submit"
+                id="button-addon2"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          <ul class="navbar-nav ms-auto">
             <li class="nav-item">
               <router-link :to="{ name: 'home' }" class="nav-link"
                 >Home
@@ -68,27 +88,11 @@
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'cart' }" class="nav-link"
-                >Cart ({{ this.$store.state.cart.length }})
+                ><i class="fas fa-shopping-cart"></i> ({{ this.$store.state.cart.length }})
               </router-link>
             </li>
           </ul>
-          <div class="form-group mx-3">
-            <div class="input-group">
-              <input
-                class="form-control me-sm-2 px-3"
-                type="text"
-                placeholder="Search"
-                aria-describedby="button-addon2"
-              />
-              <button
-                class="btn btn-secondary my-2 my-sm-0 rounded-1"
-                type="submit"
-                id="button-addon2"
-              >
-                Search
-              </button>
-            </div>
-          </div>
+          
         </div>
       </div>
     </nav>

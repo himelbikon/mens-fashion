@@ -127,7 +127,7 @@
     <div class="container bg-white py-2 my-2">
       <h3 class="text-center my-3">{{ product.name }} details</h3>
 
-      <div>{{ product.details }}</div>
+      <div class="p-3">{{ product.details }}</div>
     </div>
 
     <div class="container bg-light pb-2" v-if="categorySlug">

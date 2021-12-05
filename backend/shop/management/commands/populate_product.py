@@ -25,7 +25,7 @@ class Command(BaseCommand):
             )
 
             product.save()
-            print(f'[{serial}]', product)
+            print(f'[{serial +1}]', product)
 
         except Exception as e:
             print(e)

@@ -1,7 +1,7 @@
 <template>
   <div class="some-products pt-5">
     <div class="container my-3">
-      <h1 class="text-center">{{ title }}</h1>
+      <h1 class="text-center"> <span class="title shadow"> {{ title }}</span></h1>
 
       <div class="row my-4">
         <div
@@ -77,3 +77,10 @@ export default {
   },
 };
 </script>
+
+<style scope>
+/*  h1 {
+    text-decoration: underline;
+  }*/
+
+</style>

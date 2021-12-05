@@ -1,7 +1,7 @@
 <template>
   <div class="category-box">
     <div class="container">
-      <h2 class="text-center my-3">Categories</h2>
+      <h2 class="text-center my-4"><span class="title shadow">Categories</span></h2>
       <div class="row d-flex justify-content-center">
         <div
           class="col-5 col-md-3 col-lg-2 my-1"
@@ -55,5 +55,9 @@ export default {
 a {
   text-decoration: none;
 }
+
+/*h2 {
+  text-decoration: underline;
+  }*/
 </style>
 

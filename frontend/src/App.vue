@@ -66,6 +66,14 @@ export default {
 </script>
 
 <style>
+
+.title {
+  /*background: white;*/
+  border-radius: 50px;
+  padding: 7px 50px;
+}
+
+
 main {
   min-height: 80vh;
 }
