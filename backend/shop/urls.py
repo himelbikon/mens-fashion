@@ -11,6 +11,7 @@ urlpatterns = [
     path('showcases/', Showcases.as_view()),
 
     path('orders/', OrdersView.as_view()),
+    path('orders/<int:id>/', OrderDetails.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

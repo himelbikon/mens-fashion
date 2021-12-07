@@ -66,13 +66,20 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap");
+
+* {
+  font-family: "Noto Serif", serif;
+}
 
 .title {
   /*background: white;*/
   border-radius: 50px;
-  padding: 7px 50px;
+  padding: 3px 50px;
+  background: #5b62f4;
+  color: white;
+  font-weight: bold;
 }
-
 
 main {
   min-height: 80vh;

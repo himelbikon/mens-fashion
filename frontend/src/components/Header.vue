@@ -2,11 +2,9 @@
   <div class="header">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <router-link :to="{ name: 'home' }" class="navbar-brand"
-          >
+        <router-link :to="{ name: 'home' }" class="navbar-brand">
           <img class="img-fluid" src="../assets/a.png" style="width: 50px" />
-          </router-link
-        >
+        </router-link>
         <button
           class="navbar-toggler"
           type="button"
@@ -69,9 +67,9 @@
                 <router-link :to="{ name: 'orders' }" class="dropdown-item">
                   Orders
                 </router-link>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-                <div class="dropdown-divider"></div>
+                <!-- <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a> -->
+                <!-- <div class="dropdown-divider"></div> -->
                 <button class="dropdown-item" @click="logout">Logout</button>
               </div>
             </li>
@@ -88,11 +86,12 @@
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'cart' }" class="nav-link"
-                ><i class="fas fa-shopping-cart"></i> ({{ this.$store.state.cart.length }})
+                ><i class="fas fa-shopping-cart"></i> ({{
+                  this.$store.state.cart.length
+                }})
               </router-link>
             </li>
           </ul>
-          
         </div>
       </div>
     </nav>

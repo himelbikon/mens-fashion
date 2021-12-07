@@ -14,7 +14,6 @@ class SingleProduct(APIView):
         return Response(serializer.data)
 
 
-
 class ProductsOrderBy(APIView):
     def get(self, request):
         limit = int(request.GET.get('limit', 9))
@@ -66,4 +65,17 @@ class OrdersView(APIView):
         serializer = OrderSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        return Response(serializer.data)
+
+
+class OrderDetails(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id):
+        order = Order.objects.get(pk=id)
+
+        if request.user != order.user:
+            raise exceptions.APIException('Invalid user!')
+
+        serializer = OrderSerializer(order)
         return Response(serializer.data)

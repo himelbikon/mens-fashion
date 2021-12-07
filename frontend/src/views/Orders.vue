@@ -14,7 +14,13 @@
         </thead>
         <tbody class="text-dark">
           <tr v-for="order in orders" :key="order">
-            <td scope="row">{{ order.first_name }} {{ order.last_name }}</td>
+            <td scope="row">
+              <router-link
+                :to="{ name: 'order-details', params: { id: order.id } }"
+              >
+                {{ order.first_name }} {{ order.last_name }}
+              </router-link>
+            </td>
             <td>{{ order.token }}</td>
             <td>{{ order.delivered }}</td>
           </tr>

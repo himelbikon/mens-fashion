@@ -39,7 +39,9 @@
             <!-- <p class="bg-light text-dark py-2 rounded">
               Some representative placeholder content for the first slide.
             </p> -->
-            <button class="btn btn-outline-primary">Shop Now</button>
+            <router-link :to="{ name: 'shop' }" class="btn btn-outline-primary"
+              >Shop Now</router-link
+            >
           </div>
         </div>
         <div class="carousel-item">
@@ -53,7 +55,9 @@
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
               reiciendis, ullam quam expedita inventore pariatur.
             </p> -->
-            <button class="btn btn-outline-primary">Shop Now</button>
+            <router-link :to="{ name: 'shop' }" class="btn btn-outline-primary"
+              >Shop Now</router-link
+            >
           </div>
         </div>
         <div class="carousel-item">
@@ -66,7 +70,9 @@
             <!-- <p class="bg-light text-dark py-2 rounded">
               Some representative placeholder content for the first slide.
             </p> -->
-            <button class="btn btn-outline-primary">Shop Now</button>
+            <router-link :to="{ name: 'shop' }" class="btn btn-outline-primary"
+              >Shop Now</router-link
+            >
           </div>
         </div>
       </div>

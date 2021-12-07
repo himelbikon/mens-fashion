@@ -9,6 +9,7 @@ import Shop from "@/views/Shop";
 import Cart from "@/views/Cart";
 import Checkout from "@/views/Checkout";
 import Orders from "@/views/Orders";
+import OrderDetails from "@/views/OrderDetails";
 // import Test from "@/views/Test";
 
 const routes = [
@@ -59,6 +60,14 @@ const routes = [
     path: "/orders",
     name: "orders",
     component: Orders,
+    meta: {
+      requireLogin: true,
+    },
+  },
+  {
+    path: "/orders/:id/",
+    name: "order-details",
+    component: OrderDetails,
     meta: {
       requireLogin: true,
     },

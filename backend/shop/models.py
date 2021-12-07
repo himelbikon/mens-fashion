@@ -128,6 +128,7 @@ class OrderItem(models.Model):
         Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, null=True, blank=True)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.IntegerField(default=1)
 
@@ -136,3 +137,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.id}: {self.product.name}'
+
+    def save(self, *args, **kwargs):
+        self.name = self.product.name
+        super(OrderItem, self).save(*args, **kwargs)
