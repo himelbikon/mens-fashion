@@ -84,6 +84,11 @@
                 >Login</router-link
               >
             </li>
+            <li class="nav-item" v-if="!this.$store.state.isAuthenticated">
+              <router-link :to="{ name: 'register' }" class="nav-link"
+                >Register</router-link
+              >
+            </li>
             <li class="nav-item">
               <router-link :to="{ name: 'cart' }" class="nav-link"
                 ><i class="fas fa-shopping-cart"></i> ({{

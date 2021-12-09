@@ -10,6 +10,7 @@ import Cart from "@/views/Cart";
 import Checkout from "@/views/Checkout";
 import Orders from "@/views/Orders";
 import OrderDetails from "@/views/OrderDetails";
+import Register from "@/views/Register";
 // import Test from "@/views/Test";
 
 const routes = [
@@ -24,14 +25,25 @@ const routes = [
   //   component: Test,
   // },
   {
-    path: "/about/",
+    path: "/about",
     name: "about",
     component: About,
   },
   {
-    path: "/login/",
+    path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      nologin: true,
+    },
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register,
+    meta: {
+      nologin: true,
+    },
   },
   {
     path: "/shop/products/:id/",
@@ -85,6 +97,11 @@ router.beforeEach((to, from, next) => {
     !store.state.token
   ) {
     next({ name: "login", query: { to: to.path } });
+  } else if (
+    to.matched.some((record) => record.meta.nologin) &&
+    store.state.token
+  ) {
+    next({ name: "home" });
   } else {
     next();
   }
