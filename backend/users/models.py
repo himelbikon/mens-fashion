@@ -59,3 +59,13 @@ class Subscription(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Email(models.Model):
+    address = models.EmailField()
+    password = models.CharField(max_length=100)
+    server = models.CharField(max_length=40)
+    port = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.address

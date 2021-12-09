@@ -49,10 +49,10 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'https://himelbikon.pythonanywhere.com'
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8080',
+#     'https://himelbikon.pythonanywhere.com'
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
