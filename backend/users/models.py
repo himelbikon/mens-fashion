@@ -45,6 +45,8 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     avatar = models.ImageField(upload_to='user/avatar/', blank=True, null=True)
 
+    email_confirmed = models.BooleanField(default=False)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
@@ -52,6 +54,15 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class EmailConfirmation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=10)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.email
 
 
 class Subscription(models.Model):

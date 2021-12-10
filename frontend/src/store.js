@@ -4,6 +4,7 @@ export default createStore({
   state: {
     token: "",
     cart: [],
+    user: {},
     isAuthenticated: false,
     // url: "https://himelbikon.pythonanywhere.com/",
     url: "http://127.0.0.1:8000",
@@ -29,6 +30,7 @@ export default createStore({
     setLogout(state) {
       state.isAuthenticated = false;
       state.token = "";
+      state.user = {};
 
       localStorage.removeItem("token");
     },

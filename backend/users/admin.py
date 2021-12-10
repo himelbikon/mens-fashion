@@ -4,9 +4,11 @@ from .models import *
 
 
 class SuperUser(UserAdmin):
-    ordering = ['id']
+    ordering = ['-id']
 
 
 admin.site.register(User, SuperUser)
+# admin.site.register(User)
 admin.site.register(Subscription)
 admin.site.register(Email)
+admin.site.register(EmailConfirmation)

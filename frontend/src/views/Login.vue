@@ -85,6 +85,8 @@ export default {
           .then((response) => {
             const token = response.data.access;
             this.$store.commit("setLogin", token);
+            this.setProfile();
+
             if (this.$route.query.to) {
               this.$router.push(this.$route.query.to);
             } else {
@@ -103,6 +105,18 @@ export default {
             }
           });
       }
+    },
+    async setProfile() {
+      axios
+        .get("/api/users/profile/")
+        .then((response) => {
+          this.$store.state.user = response.data;
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log(error.response.data);
+          }
+        });
     },
   },
 };

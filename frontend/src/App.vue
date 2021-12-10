@@ -1,6 +1,7 @@
 <template>
   <div class="main-app">
     <Header />
+    <!-- <h3>User: {{ this.$store.state.user }}</h3> -->
     <main>
       <router-view />
     </main>
@@ -26,7 +27,8 @@ export default {
     if (this.$store.state.token) {
       this.getProfile();
     }
-    // this.$router.push({ name: "orders" });
+
+    this.check_active_user();
   },
   watch: {
     $route(to, from) {
@@ -51,7 +53,8 @@ export default {
     async getProfile() {
       await axios
         .get("/api/users/profile/")
-        .then(() => {
+        .then((response) => {
+          this.$store.state.user = response.data;
           console.log("Logged in user!");
         })
         .catch((error) => {
@@ -60,6 +63,11 @@ export default {
           }
           this.$store.commit("setLogout");
         });
+    },
+    check_active_user() {
+      if (this.$store.state.user && !this.$store.state.user.email_confirmed) {
+        this.$router.push({ name: "confirm-email" });
+      }
     },
   },
 };

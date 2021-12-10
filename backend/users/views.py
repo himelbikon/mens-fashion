@@ -1,3 +1,4 @@
+from django.utils.timezone import utc
 import random
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -6,13 +7,13 @@ from rest_framework.permissions import IsAuthenticated
 from methods import send_mail
 from .models import *
 from .serializers import *
+from datetime import datetime
 
 
 class Profile(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # user = User.objects.get(pk=1)
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
@@ -33,25 +34,43 @@ class Subscribe(APIView):
 
 
 class Registration(APIView):
-    def post(self, request, token=None):
+    def post(self, request):
         if request.user.is_authenticated:
             raise APIException('User already registered!')
 
         data = request.data
         serializer = UserSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-
-        self.register_email(data)
+        serializer.save()
         return Response(serializer.data)
 
-    def register_email(self, data):
-        subject = data['email_subject']
-        token = self.get_token()
 
-        message = "Don't share this link with anyone \n" + f"/{token}/"
+class EamailConfirmationAPIView(APIView):
+    permission_classes = [IsAuthenticated]
 
-        send_mail(data['email'], subject, message)
+    def post(self, request):
+        pass
 
-    def get_token(self):
-        return ''.join(
-            [random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for _ in range(20)])
+    def get(self, request):
+        if request.user.email_confirmed:
+            raise APIException('User already confirmed email!')
+
+        now = datetime.utcnow().replace(tzinfo=utc)
+
+        seconds = (
+            now - EmailConfirmation.objects.all().first().created_at).total_seconds()
+
+        # email_confirmation = EmailConfirmation(
+        #     user=request.user,
+        #     code=''.join(
+        #         [random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for _ in range(6)])
+        # )
+        # email_confirmation.save()
+        return Response({'ok': int(seconds)})
+
+
+class AllUsers(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)

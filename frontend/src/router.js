@@ -11,6 +11,7 @@ import Checkout from "@/views/Checkout";
 import Orders from "@/views/Orders";
 import OrderDetails from "@/views/OrderDetails";
 import Register from "@/views/Register";
+import ConfirmEmail from "@/views/ConfirmEmail";
 // import Test from "@/views/Test";
 
 const routes = [
@@ -25,7 +26,7 @@ const routes = [
   //   component: Test,
   // },
   {
-    path: "/about",
+    path: "/about/",
     name: "about",
     component: About,
   },
@@ -80,6 +81,14 @@ const routes = [
     path: "/orders/:id/",
     name: "order-details",
     component: OrderDetails,
+    meta: {
+      requireLogin: true,
+    },
+  },
+  {
+    path: "/confirm-email",
+    name: "confirm-email",
+    component: ConfirmEmail,
     meta: {
       requireLogin: true,
     },

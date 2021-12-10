@@ -140,7 +140,7 @@ export default {
       axios
         .post(`/api/users/register/`, data)
         .then(() => {
-          this.success = `Check your email ${this.email}`;
+          this.$router.push({ name: "login" });
         })
         .catch((error) => {
           if (error.response) {
