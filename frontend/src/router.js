@@ -11,7 +11,7 @@ import Checkout from "@/views/Checkout";
 import Orders from "@/views/Orders";
 import OrderDetails from "@/views/OrderDetails";
 import Register from "@/views/Register";
-import ConfirmEmail from "@/views/ConfirmEmail";
+import Profile from "@/views/Profile";
 // import Test from "@/views/Test";
 
 const routes = [
@@ -86,9 +86,9 @@ const routes = [
     },
   },
   {
-    path: "/confirm-email",
-    name: "confirm-email",
-    component: ConfirmEmail,
+    path: "/profile",
+    name: "profile",
+    component: Profile,
     meta: {
       requireLogin: true,
     },

@@ -2,7 +2,7 @@ import smtplib
 from users.models import Email
 
 
-def send_mail(to, subject, message):
+def send_email(to, subject, message):
     email = get_email()
 
     server = smtplib.SMTP_SSL(email.server, email.port)

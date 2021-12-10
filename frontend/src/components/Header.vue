@@ -64,11 +64,15 @@
                 >User</a
               >
               <div class="dropdown-menu">
+                <router-link :to="{ name: 'profile' }" class="dropdown-item">
+                  Profile
+                </router-link>
                 <router-link :to="{ name: 'orders' }" class="dropdown-item">
                   Orders
                 </router-link>
-                <!-- <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a> -->
+
+                <!-- <a class="dropdown-item" href="#">Another action</a> -->
+                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
                 <!-- <div class="dropdown-divider"></div> -->
                 <button class="dropdown-item" @click="logout">Logout</button>
               </div>

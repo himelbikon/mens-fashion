@@ -27,8 +27,6 @@ export default {
     if (this.$store.state.token) {
       this.getProfile();
     }
-
-    this.check_active_user();
   },
   watch: {
     $route(to, from) {
@@ -55,6 +53,7 @@ export default {
         .get("/api/users/profile/")
         .then((response) => {
           this.$store.state.user = response.data;
+          console.log(response.data);
           console.log("Logged in user!");
         })
         .catch((error) => {
@@ -63,11 +62,6 @@ export default {
           }
           this.$store.commit("setLogout");
         });
-    },
-    check_active_user() {
-      if (this.$store.state.user && !this.$store.state.user.email_confirmed) {
-        this.$router.push({ name: "confirm-email" });
-      }
     },
   },
 };

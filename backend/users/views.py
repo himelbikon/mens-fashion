@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 from rest_framework.permissions import IsAuthenticated
-from methods import send_mail
+from methods import send_email
 from .models import *
 from .serializers import *
 from datetime import datetime
@@ -35,38 +35,15 @@ class Subscribe(APIView):
 
 class Registration(APIView):
     def post(self, request):
-        if request.user.is_authenticated:
+        user = User.objects.filter(email=request.data['email']).first()
+
+        if request.user.is_authenticated or user:
             raise APIException('User already registered!')
 
-        data = request.data
-        serializer = UserSerializer(data=data)
+        serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-
-
-class EamailConfirmationAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        pass
-
-    def get(self, request):
-        if request.user.email_confirmed:
-            raise APIException('User already confirmed email!')
-
-        now = datetime.utcnow().replace(tzinfo=utc)
-
-        seconds = (
-            now - EmailConfirmation.objects.all().first().created_at).total_seconds()
-
-        # email_confirmation = EmailConfirmation(
-        #     user=request.user,
-        #     code=''.join(
-        #         [random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789') for _ in range(6)])
-        # )
-        # email_confirmation.save()
-        return Response({'ok': int(seconds)})
 
 
 class AllUsers(APIView):
@@ -74,3 +51,12 @@ class AllUsers(APIView):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+
+    # def code(self):
+    #     string = 'QWERTYUIOPLKJHGFDSAZXCVBNM1234567890'
+    #     return ''.join([random.choice(string) for _ in range(6)])
+
+        # now = datetime.utcnow().replace(tzinfo=utc)
+
+        # seconds = (
+        #     now - EmailConfirmation.objects.all().first().created_at).total_seconds()

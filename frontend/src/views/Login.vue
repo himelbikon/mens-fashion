@@ -69,7 +69,6 @@ export default {
   },
   methods: {
     async submitHandler() {
-      // console.log("form");
       this.errors = [];
 
       if (this.email === "") {
@@ -110,6 +109,7 @@ export default {
       axios
         .get("/api/users/profile/")
         .then((response) => {
+          // console.log("setProfile");
           this.$store.state.user = response.data;
         })
         .catch((error) => {

@@ -3,6 +3,7 @@ from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = User
         fields = [
@@ -12,7 +13,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'password',
             'avatar',
-            'email_confirmed',
+
+            'is_admin',
         ]
 
         extra_kwargs = {'password': {'write_only': True}}
