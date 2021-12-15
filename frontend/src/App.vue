@@ -25,6 +25,14 @@ export default {
     this.$store.commit("initStore");
     this.setCategories();
     if (this.$store.state.token) {
+      axios.defaults.headers.common = {
+        Authorization: "Bearer " + this.$store.state.token,
+      };
+    } else {
+      axios.defaults.headers.common = {};
+    }
+
+    if (this.$store.state.token) {
       this.getProfile();
     }
   },
@@ -32,8 +40,25 @@ export default {
     $route(to, from) {
       if (to != from) {
         window.scroll(0, 0);
+
+        if (this.$store.state.token) {
+          axios.defaults.headers.common = {
+            Authorization: "Bearer " + this.$store.state.token,
+          };
+        } else {
+          axios.defaults.headers.common = {};
+        }
       }
     },
+    // check_token() {
+    //   if (localStorage.getItem("token")) {
+    //     axios.defaults.headers.common = {
+    //       Authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
+    //     };
+    //   } else {
+    //     axios.defaults.headers.common = {};
+    //   }
+    // },
   },
   methods: {
     async setCategories() {
@@ -53,7 +78,7 @@ export default {
         .get("/api/users/profile/")
         .then((response) => {
           this.$store.state.user = response.data;
-          console.log(response.data);
+          // console.log(response.data);
           console.log("Logged in user!");
         })
         .catch((error) => {

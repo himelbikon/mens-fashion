@@ -35,6 +35,10 @@
             <td>Place:</td>
             <td>{{ order.place }}</td>
           </tr>
+          <tr>
+            <td>Total Place:</td>
+            <td>{{ order.paid_amount }}</td>
+          </tr>
 
           <tr>
             <td>Token:</td>
@@ -47,8 +51,9 @@
         <thead>
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
           </tr>
         </thead>
         <tbody>
@@ -62,6 +67,7 @@
             </td>
             <td>{{ item.price }}</td>
             <td>{{ item.quantity }}</td>
+            <td>{{ item.quantity * item.price }}</td>
           </tr>
         </tbody>
       </table>

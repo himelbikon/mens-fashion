@@ -106,6 +106,10 @@ export default {
       }
     },
     async setProfile() {
+      axios.defaults.headers.common = {
+        Authorization: "Bearer " + this.$store.state.token,
+      };
+
       axios
         .get("/api/users/profile/")
         .then((response) => {

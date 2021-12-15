@@ -46,9 +46,14 @@ export default {
   },
   methods: {
     async getOrders() {
+      console.log("get orders");
       await axios
         .get("/api/shop/orders/")
         .then((response) => {
+          // for (const data in response.data) {
+          //   this.orders.push(data);
+          // }
+
           this.orders = response.data;
         })
         .catch((error) => {
